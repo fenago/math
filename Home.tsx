@@ -42,6 +42,7 @@ export default function Home() {
   const [selectedModel, setSelectedModel] = useState(
     'gemini-2.5-flash-image-preview',
   );
+  
 
   // Load background image when generatedImage changes
   useEffect(() => {
@@ -63,15 +64,18 @@ export default function Home() {
     }
   }, []);
 
+
   // Initialize canvas with white background
   const initializeCanvas = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    // Fill canvas with white background
+    // Clear and fill canvas with white background
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.fillStyle = '#FFFFFF';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
+
 
   // Draw the background image to the canvas
   const drawImageToCanvas = () => {
@@ -164,6 +168,7 @@ export default function Home() {
     setGeneratedImage(null);
     backgroundImageRef.current = null;
   };
+
 
   const handleColorChange = (e) => {
     setPenColor(e.target.value);
@@ -353,35 +358,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-2 sm:mb-6 gap-2">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold mb-0 leading-tight font-mega">
-                Gemini Co-Drawing
+                Math Helper
               </h1>
               <p className="text-sm sm:text-base text-gray-500 mt-1">
-                Built with{' '}
-                <a
-                  className="underline"
-                  href="https://ai.google.dev/gemini-api/docs/image-generation"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Gemini native image generation
-                </a>
+                Built By: LVNG.ai
               </p>
               <p className="text-sm sm:text-base text-gray-500 mt-1">
-                by{' '}
-                <a
-                  className="underline"
-                  href="https://x.com/trudypainter"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  @trudypainter
-                </a>{' '}
-                and{' '}
-                <a
-                  className="underline"
-                  href="https://x.com/alexanderchen"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  @alexanderchen
-                </a>
+                Dr. Lee, Matty Squarzoni
               </p>
             </div>
 
@@ -403,6 +386,7 @@ export default function Home() {
                   <ChevronDown className="w-5 h-5" />
                 </div>
               </div>
+              
               <button
                 type="button"
                 className="w-10 h-10 rounded-full overflow-hidden mr-2 flex items-center justify-center border-2 border-white shadow-sm transition-transform hover:scale-110"
@@ -431,7 +415,7 @@ export default function Home() {
             </menu>
           </div>
 
-          {/* Canvas section with notebook paper background */}
+          {/* Canvas section */}
           <div className="w-full mb-6">
             <canvas
               ref={canvasRef}
